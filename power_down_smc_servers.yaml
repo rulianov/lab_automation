@@ -5,7 +5,7 @@
   tasks:
     - name: Power down Supermicro server
       community.general.ipmi_power:
-        user: '{{ smc-user }}'
-        password: '{{ smc-password }}'
+        user: '{{ smc_user }}'
+        password: '{{ smc_password }}'
         action: 'off'
         name: 10.4.11.140
