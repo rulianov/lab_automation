@@ -4,7 +4,7 @@
     msg: 'This is a custom message from Ansible.'
 
 - name: Power down Cisco IMC servers
-  hosts: { { hosts_group_name } }
+  hosts: '{{ hosts_group_name }}'
   gather_facts: no
 
   tasks:
