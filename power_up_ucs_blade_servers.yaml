@@ -1,10 +1,10 @@
 ---
-- name: Power down Cisco blade servers
+- name: Power up Cisco blade servers
   hosts: '{{hosts_group_name}}'
   gather_facts: no
 
   tasks:
-    - name: Power down server
+    - name: Power up server
       imc_rest:
         hostname: '{{ hostvars[inventory_hostname].ucs_ip }}'
         username: '{{ ucs_user }}'
@@ -13,7 +13,7 @@
         content: |
           <configConfMo cookie="1502884658/ca2c8e57-77eb-4e76-b3d1-3dca87fd0d1b" inHierarchical="false">
           <inConfig>
-          <lsPower state="soft-shut-down" dn="{{ item }}/power" status="created,modified" ></lsPower>
+          <lsPower state="up" dn="{{ item }}/power" status="created,modified" ></lsPower>
           </inConfig>
           </configConfMo>
       loop: '{{ hostvars[inventory_hostname].blades }}'
