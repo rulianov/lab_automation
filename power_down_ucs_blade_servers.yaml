@@ -1,0 +1,19 @@
+---
+- name: Power down Cisco blade servers
+  hosts: '{{hosts_group_name}}'
+  gather_facts: no
+
+  tasks:
+    - name: Power down server
+      imc_rest:
+        hostname: '{{ hostvars[inventory_hostname].ucs_ip }}'
+        username: '{{ ucs_user }}'
+        password: '{{ ucs_pass }}'
+        validate_certs: false
+        content: |
+          <configConfMo cookie="1502884658/ca2c8e57-77eb-4e76-b3d1-3dca87fd0d1b" inHierarchical="false">
+          <inConfig>
+          <lsPower state="soft-shut-down" dn="org-root/ls-chassis-01-server-03-new/power" status="created,modified" ></lsPower>
+          </inConfig>
+          </configConfMo>
+      delegate_to: localhost
