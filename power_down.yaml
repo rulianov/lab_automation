@@ -1,4 +1,8 @@
 ---
+- name: Print a simple message
+  ansible.builtin.debug:
+    msg: 'This is a custom message from Ansible.'
+
 - name: Power down Cisco IMC servers
   hosts: { { hosts_group_name } }
   gather_facts: no
