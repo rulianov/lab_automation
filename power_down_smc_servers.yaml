@@ -1,0 +1,9 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Power down Supermicro server
+      community.general.ipmi_power:
+        user: '{{ smc-user }}'
+        password: '{{ smc-password }}'
+        action: 'off'
+        name: 192.168.70.46
