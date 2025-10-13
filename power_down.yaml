@@ -1,0 +1,17 @@
+---
+- name: Power down Cisco IMC servers
+  hosts: { { hosts_group_name } }
+  gather_facts: no
+
+  tasks:
+    - name: Power down server
+      imc_rest:
+        hostname: '{{ inventory_hostname }}'
+        username: '{{ cimc_username }}'
+        password: '{{ cimc_password }}'
+        validate_certs: false
+        content: |
+          <configConfMo><inConfig>
+            <computeRackUnit dn="sys/rack-unit-1" adminPower="soft-shut-down"/>
+          </inConfig></configConfMo>
+      delegate_to: localhost
