@@ -7,6 +7,6 @@
       community.general.ipmi_power:
         user: 'ADMIN'
         password: '{{ smc_password }}'
-        state: 'up'
+        state: 'boot'
         name: '{{ inventory_hostname }}'
       delegate_to: localhost
