@@ -9,3 +9,4 @@
         password: '{{ smc_password }}'
         state: 'shutdown'
         name: '{{ inventory_hostname }}'
+      delegate_to: localhost
