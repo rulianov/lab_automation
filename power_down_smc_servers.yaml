@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Power down SMC servers
+  hosts: localhost
   gather_facts: no
   tasks:
     - name: Power down Supermicro server
@@ -7,4 +8,4 @@
         user: '{{ smc-user }}'
         password: '{{ smc-password }}'
         action: 'off'
-        name: 192.168.70.46
+        name: 10.4.11.140
