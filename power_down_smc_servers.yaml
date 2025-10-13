@@ -7,5 +7,5 @@
       community.general.ipmi_power:
         user: '{{ smc_user }}'
         password: '{{ smc_password }}'
-        action: 'off'
+        state: 'off'
         name: 10.4.11.140
