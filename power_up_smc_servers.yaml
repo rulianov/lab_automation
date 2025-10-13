@@ -1,0 +1,12 @@
+---
+- name: Power up SMC servers
+  hosts: '{{hosts_group_name}}'
+  gather_facts: no
+  tasks:
+    - name: Power up Supermicro server
+      community.general.ipmi_power:
+        user: 'ADMIN'
+        password: '{{ smc_password }}'
+        state: 'up'
+        name: '{{ inventory_hostname }}'
+      delegate_to: localhost
