@@ -45,3 +45,12 @@
         - lab == "lab"
         - app == "vdcm"
       ignore_errors: yes
+
+    - name: Upgrade RHEL Family OS 9.x packages
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+      when:
+        - ansible_distribution == "Rocky"
+        - os_upgrade
+      ignore_errors: yes
