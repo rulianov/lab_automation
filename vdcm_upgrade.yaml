@@ -2,11 +2,14 @@
 - hosts: '{{ variable_host }}'
   vars:
     vdcm_sw_folder: '/data/Software/Synamedia/vdcm'
+    vdcm_sw_folder: '/data/Software/Synamedia/Rosa'
+    vdcm_local_sw_folder: '/vdcm'
+    vsm_local_sw_folder: '/vsm'
   gather_facts: yes
   tasks:
     #execute update on dmz hosts when folder with application is not mounted directly
     - name: update vDCM SW for Centos 7
-      ansible.builtin.script: '{{ centos7_vdcm_sw }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "CentOS"
         - lab == "dmz"
@@ -14,7 +17,7 @@
       ignore_errors: yes
 
     - name: update vDCM SW for Oracle Linux
-      ansible.builtin.script: '{{ ol8_vdcm_sw }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "OracleLinux"
         - lab == "dmz"
@@ -22,7 +25,7 @@
       ignore_errors: yes
 
     - name: update vDCM SW for Rocky Linux
-      ansible.builtin.script: '{{ rocky9_vdcm_sw }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "Rocky"
         - lab == "dmz"
@@ -45,6 +48,10 @@
         - lab == "lab"
         - app == "vdcm"
       ignore_errors: yes
+
+    - name: Wait 10 minutes before continuing
+      ansible.builtin.pause:
+        minutes: 10
 
     - name: Upgrade RHEL Family OS 9.x packages
       ansible.builtin.dnf:
