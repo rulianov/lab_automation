@@ -2,7 +2,7 @@
 - hosts: '{{ variable_host }}'
   vars:
     vdcm_sw_folder: '/data/Software/Synamedia/vdcm'
-    vdcm_sw_folder: '/data/Software/Synamedia/Rosa'
+    vsm_sw_folder: '/data/Software/Synamedia/Rosa'
     vdcm_local_sw_folder: '/vdcm'
     vsm_local_sw_folder: '/vsm'
   gather_facts: yes
