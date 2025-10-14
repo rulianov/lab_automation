@@ -9,7 +9,7 @@
   tasks:
     #execute update on dmz hosts when folder with application is not mounted directly
     - name: update vDCM SW for Centos 7
-      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }}/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "CentOS"
         - lab == "dmz"
@@ -17,7 +17,7 @@
       ignore_errors: yes
 
     - name: update vDCM SW for Oracle Linux
-      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }}/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "OracleLinux"
         - lab == "dmz"
@@ -25,7 +25,7 @@
       ignore_errors: yes
 
     - name: update vDCM SW for Rocky Linux
-      ansible.builtin.script: '{{ vdcm_local_sw_folder }/{{ sw_script_name }} --non-interactive -k'
+      ansible.builtin.script: '{{ vdcm_local_sw_folder }}/{{ sw_script_name }} --non-interactive -k'
       when:
         - ansible_distribution == "Rocky"
         - lab == "dmz"
