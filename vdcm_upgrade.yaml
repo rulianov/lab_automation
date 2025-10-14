@@ -1,0 +1,47 @@
+---
+- hosts: '{{ variable_host }}'
+  vars:
+    vdcm_sw_folder: '/data/Software/Synamedia/vdcm'
+  gather_facts: yes
+  tasks:
+    #execute update on dmz hosts when folder with application is not mounted directly
+    - name: update vDCM SW for Centos 7
+      ansible.builtin.script: '{{ centos7_vdcm_sw }} --non-interactive -k'
+      when:
+        - ansible_distribution == "CentOS"
+        - lab == "dmz"
+        - app == "vdcm"
+      ignore_errors: yes
+
+    - name: update vDCM SW for Oracle Linux
+      ansible.builtin.script: '{{ ol8_vdcm_sw }} --non-interactive -k'
+      when:
+        - ansible_distribution == "OracleLinux"
+        - lab == "dmz"
+        - app == "vdcm"
+      ignore_errors: yes
+
+    - name: update vDCM SW for Rocky Linux
+      ansible.builtin.script: '{{ rocky9_vdcm_sw }} --non-interactive -k'
+      when:
+        - ansible_distribution == "Rocky"
+        - lab == "dmz"
+        - app == "vdcm"
+      ignore_errors: yes
+
+    #execute update on lab hosts when folder with application is mounted directly
+    - name: Ensure vDCM SW upgrade script is executable
+      ansible.builtin.file:
+        path: '{{ vdcm_sw_folder }}/{{ sw_script_name }}'
+        mode: '0755'
+      when:
+        - lab == "lab"
+        - app == "vdcm"
+
+    - name: update vDCM SW for Rocky Linux
+      ansible.builtin.shell: '{{ vdcm_sw_folder }}/{{ sw_script_name }} --non-interactive -k'
+      when:
+        - ansible_distribution == "Rocky"
+        - lab == "lab"
+        - app == "vdcm"
+      ignore_errors: yes
