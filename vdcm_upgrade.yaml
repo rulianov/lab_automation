@@ -52,5 +52,5 @@
         state: latest
       when:
         - ansible_distribution == "Rocky"
-        - os_upgrade
+        - os_upgrade == 'yes'
       ignore_errors: yes
